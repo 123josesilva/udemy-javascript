@@ -1,14 +1,9 @@
 const formulario = document.querySelector('.animated-form')
 
-ouvinte()
-
-function ouvinte() {
-
-    formulario.addEventListener('submit', (event) => {
-        event.preventDefault();
-        validaData();
-    })
-}
+formulario.addEventListener('submit', (event) => {
+    event.preventDefault();
+    validaData();
+})
 
 
 
@@ -16,31 +11,46 @@ function ouvinte() {
 function validaData() {
     const inputs = document.querySelectorAll('.input-imc');
 
-    let valoreVazios = false;
+    let valoresVazios = false;
     let valoresNegativos = false;
 
     inputs.forEach((input) => {
         if (input.value === '') {
-            valoreVazios = true;
-            console.log('Valores vazios')
+            valoresVazios = true;      
         } else if (input.value <= 0) {
             valoresNegativos = true;
-            console.log('Valores negativo ou zerados');
-        }else {
-            calculaIMC();
         }
     })
+
+    if (valoresVazios === true) {
+        console.log('valore Vazios');
+    }else if(valoresNegativos === true){
+        console.log('valoresNegativos');
+    }else{
+        calculaIMC() 
+    }
 
 }
 
 function calculaIMC(){
     const peso = document.querySelector('#input-peso');
     const altura = document.querySelector('#input-altura');
-    const test = document.querySelector('.input-imc')
 
-    console.log('input:', test);
-    // console.log('peso: ', peso.value);
-    // console.log('altura: ', altura.value);
+    calculo(peso.value, altura.value)
+    
+    function calculo(peso, altura){
+       let x = parseFloat(peso);
+       let y = parseFloat(altura);
+      
+        resultado = x / (y * y); 
 
+        return resultado;
+    }
+
+    if(resultado <= 18.4){
+        console.log('Muito abaixo do peso');
+    } else if(resultado ){
+
+    }
 }
-ouvinte()
+
